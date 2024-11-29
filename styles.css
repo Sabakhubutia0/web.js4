@@ -1,0 +1,20 @@
+.bg-blue {
+  background-color: blue;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+span {
+  color: red;
+}
+
+a {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 600px;
+}

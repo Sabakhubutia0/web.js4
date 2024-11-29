@@ -1,60 +1,74 @@
-function multipleFive(number) {
-  return number % 5 == 0;
-}
-console.log(multipleFive(10));
-console.log(multipleFive(2));
+const btn = document
+  .querySelector("#btn")
+  .addEventListener("click", function () {
+    this.remove();
+  });
+
 // დავალება 2
-function calculateDiscountedPrice(originalPrice, discountPercentage) {
-  let discountAmount = (originalPrice * discountPercentage) / 100;
-  let finalPrice = originalPrice - discountAmount;
+// const img = document.createElement("img");
+// img.src = "https://picsum.photos/id/180/2000/1600";
+// document.body.appendChild(img);
+const img = document.createElement("img");
+img.setAttribute("src", "img/photo-1.jpg");
+document.body.appendChild(img);
 
-  return finalPrice;
+//test
+
+function doSomethings() {
+  console.log("container clicked");
 }
 
-console.log(calculateDiscountedPrice(1000, 10));
-
-// დავალება 3
-
-function getCurrencySymbolFromCode(currencyCode) {
-  const currencySymbols = {
-    USD: "$",
-    EUR: "€",
-    GEL: "ლ",
-  };
-
-  if (currencySymbols[currencyCode]) {
-    return currencySymbols[currencyCode];
-  } else {
-    return "არ არსებობს ამ ვალუტის სიმბოლო";
-  }
-}
-
-console.log(getCurrencySymbolFromCode("USD"));
-console.log(getCurrencySymbolFromCode("EUR"));
-console.log(getCurrencySymbolFromCode("RUB"));
-
-// დავალება 5
-function changeText(text) {
-  return text.toLowerCase();
-}
-console.log(changeText("ME NAME IS JONE"));
-// დავალება 6
-function filterNumbers(numbers) {
-  return numbers.filter((number) => number % 2 !== 0);
-}
-console.log(filterNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]));
-
-// დავალება 7
-
-function findObject(objects, title) {
-  return objects.find((obj) => obj.title === title);
-}
-
-const objects = [
-  { title: "Html", style: "black" },
-  { title: "CSS" },
-  { title: "JS" },
+const products = [
+  {
+    name: "Laptop",
+    category_tree: [{ title: "Electronics" }, { title: "Computers" }],
+  },
+  {
+    name: "Phone",
+    category_tree: [{ title: "Electronics" }, { title: "Mobile Devices" }],
+  },
 ];
 
-console.log(findObject(objects, "Html"));
-console.log(findObject(objects, "CSS"));
+function createProductCard(product) {
+  const productCard = document.createElement("div");
+  productCard.classList.add("product-card");
+
+  const productName = document.createElement("h3");
+  productName.textContent = product.name;
+
+  const infoButton = document.createElement("button");
+  infoButton.textContent = "ინფო";
+  infoButton.classList.add("button", "info");
+
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "წაშლა";
+  deleteButton.classList.add("button", "delete");
+
+  const categoryInfo = document.createElement("div");
+  categoryInfo.classList.add("category-info");
+  categoryInfo.innerHTML = product.category_tree
+    .map((cat) => `<div>${cat.title}</div>`)
+    .join("");
+
+  productCard.appendChild(productName);
+  productCard.appendChild(infoButton);
+  productCard.appendChild(deleteButton);
+  productCard.appendChild(categoryInfo);
+
+  deleteButton.addEventListener("click", () => {
+    productCard.remove();
+  });
+
+  infoButton.addEventListener("click", () => {
+    categoryInfo.style.display =
+      categoryInfo.style.display === "none" ? "block" : "none";
+  });
+
+  return productCard;
+}
+
+const productsContainer = document.getElementById("products-container");
+products.forEach((product) => {
+  const productCard = createProductCard(product);
+  productsContainer.appendChild(productCard);
+});
