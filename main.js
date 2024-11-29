@@ -12,8 +12,6 @@ const img = document.createElement("img");
 img.setAttribute("src", "img/photo-1.jpg");
 document.body.appendChild(img);
 
-//test
-
 function doSomethings() {
   console.log("container clicked");
 }
